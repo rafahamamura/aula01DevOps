@@ -19,7 +19,7 @@ jobs:
     - name: Configurar o Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Versão estável do Node
+        node-version: '24' # Versão estável do Node
         cache: 'npm'       # Acelera o processo fazendo cache das dependências
 
     - name: Instalar Dependências (Build)
