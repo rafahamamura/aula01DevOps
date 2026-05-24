@@ -1,0 +1,17 @@
+{
+  "name": "exemplo-pipeline-devops",
+  "version": "1.0.0",
+  "description": "Exemplo de API para aula de pipeline de CI/CD",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}

@@ -1,0 +1,51 @@
+name: CI/CD Pipeline - Aula DevOps
+
+# Define os gatilhos: roda sempre que houver push ou Pull Request para a branch 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 1. FASE DE BUILD E TESTES
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Fazer o checkout do código
+      uses: actions/checkout@v4
+
+    - name: Configurar o Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Versão estável do Node
+        cache: 'npm'       # Acelera o processo fazendo cache das dependências
+
+    - name: Instalar Dependências (Build)
+      run: npm ci
+
+    - name: Executar Testes Automatizados
+      run: npm test
+
+  # 2. FASE DE IMPLANTAÇÃO (DEPLOY)
+  deploy:
+    # O Deploy SÓ acontece se a fase de testes (build-and-test) passar
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    
+    # Previne que Pull Requests tentem fazer deploy em produção. 
+    # Só faz deploy se o código for efetivamente integrado à main.
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Fazer o checkout do código
+      uses: actions/checkout@v4
+
+    - name: Simular Deploy em Servidor de Produção
+      # Aqui você explica que na vida real haveria um script de acesso via SSH, 
+      # deploy no Heroku, AWS, ou Docker registry.
+      run: |
+        echo "Iniciando implantação segura..."
+        echo "Autenticando com o token seguro: ${{ secrets.PRODUCTION_API_KEY }}"
+        echo "Deploy da versão mais recente concluído com sucesso!"
