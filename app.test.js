@@ -8,6 +8,6 @@ describe('Testes da API', () => {
     
     expect(response.statusCode).toBe(200);
     expect(response.body.status).toBe('success');
-    expect(response.body.version).toBe('1.0.1');
+    expect(response.body.version).toBe('1.0.2');
   });
 });
