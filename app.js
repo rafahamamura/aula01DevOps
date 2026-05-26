@@ -7,7 +7,7 @@ app.get('/api/status', (req, res) => {
   res.status(200).json({
     status: 'success',
     message: 'A API está rodando perfeitamente!',
-    version: '1.0.1'
+    version: '1.0.2'
   });
 });
 
